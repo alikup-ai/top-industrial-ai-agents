@@ -1,0 +1,190 @@
+# Structured data for top-industrial-ai-agents
+# This file is the source of truth. READMEs may be generated from it in future versions.
+# For v0.1 the READMEs are hand-written; this file mirrors them for future automation.
+
+version: 0.1
+last_updated: 2026-07-22
+
+categories:
+  - id: protocol-bridges
+    name_en: "Industrial Protocol Bridges"
+    name_ru: "Мосты к промышленным протоколам"
+    icon: "🔌"
+    description_en: "MCP/agent connectors for OPC UA, Modbus, MQTT, Historian"
+
+  - id: guardrails
+    name_en: "OT-Aware Guardrails & Policy Layers"
+    name_ru: "OT-осознанные guardrails и слои допуска"
+    icon: "🛡️"
+    description_en: "Safety envelopes for agents acting on physical processes"
+
+  - id: benchmarks
+    name_en: "Industrial Agent Benchmarks"
+    name_ru: "Промышленные бенчмарки агентов"
+    icon: "📊"
+
+  - id: simulators
+    name_en: "Process Simulators for Agent Evaluation"
+    name_ru: "Симуляторы процессов для оценки агентов"
+    icon: "🎛️"
+
+  - id: advisors
+    name_en: "Operator Advisors & Copilots"
+    name_ru: "Советчики и copilots оператора"
+    icon: "🤖"
+
+  - id: predictive-maintenance
+    name_en: "Predictive Maintenance with LLMs"
+    name_ru: "Предиктивное обслуживание с LLM"
+    icon: "🔧"
+
+  - id: computer-vision
+    name_en: "Industrial Computer Vision Agents"
+    name_ru: "Агенты промышленного computer vision"
+    icon: "👁️"
+
+  - id: digital-twin
+    name_en: "Digital Twin + LLM"
+    name_ru: "Цифровой двойник + LLM"
+    icon: "🌐"
+
+  - id: vendor-platforms
+    name_en: "Vendor Platforms"
+    name_ru: "Вендорские платформы"
+    icon: "🏭"
+
+  - id: research-standards
+    name_en: "Research & Standards"
+    name_ru: "Исследования и стандарты"
+    icon: "📚"
+
+  - id: adjacent-tools
+    name_en: "Adjacent Tools Worth Knowing"
+    name_ru: "Смежные инструменты, которые стоит знать"
+    icon: "🧰"
+
+projects:
+  - name: "kukapay/opcua-mcp"
+    category: protocol-bridges
+    url: "https://github.com/kukapay/opcua-mcp"
+    open_source: true
+    tags: [opc-ua, mcp]
+    summary_en: "MCP server for OPC UA. Read/write node values, browse namespace. No policy layer."
+    verdict_en: "Useful as starting reference, unsafe in production without guardrail wrapper."
+
+  - name: "Siemens WinCC OA MCP Server"
+    category: protocol-bridges
+    url: "https://www.winccoa.com/"
+    open_source: false
+    tags: [opc-ua, mqtt, mcp, vendor]
+    summary_en: "Official MCP server from Siemens for WinCC OA — datapoint read/write, OPC UA/MQTT."
+    verdict_en: "First vendor-published MCP for industrial SCADA. Vendor-locked but signals mainstream adoption."
+
+  - name: "LlamaFirewall"
+    category: guardrails
+    url: "https://github.com/meta-llama/PurpleLlama"
+    open_source: true
+    tags: [guardrails, general-purpose]
+    summary_en: "Open-source framework for LLM agent guardrails. Text-level filtering."
+    verdict_en: "Does not understand process semantics. General-purpose only."
+
+  - name: "NVIDIA NeMo-Guardrails"
+    category: guardrails
+    url: "https://github.com/NVIDIA/NeMo-Guardrails"
+    open_source: true
+    tags: [guardrails, general-purpose]
+    verdict_en: "Programmable runtime rails. General-purpose, no OT awareness."
+
+  - name: "SOP-Bench (Amazon)"
+    category: benchmarks
+    url: "https://github.com/amazon-science/SOP-Bench"
+    open_source: true
+    tags: [benchmark, sop]
+    verdict_en: "2000+ SOP tasks across 12 domains. Not process control."
+
+  - name: "AssetOpsBench (IBM)"
+    category: benchmarks
+    url: "https://github.com/ibm/AssetOpsBench"
+    open_source: true
+    tags: [benchmark, maintenance]
+    verdict_en: "Asset ops & maintenance benchmark with leaderboard. Not real-time process supervision."
+
+  - name: "Tennessee Eastman Process"
+    category: simulators
+    url: "https://github.com/camaramm/tennessee-eastman-profBraatz"
+    open_source: true
+    tags: [simulator, chemical]
+    verdict_en: "Classic chemical plant simulator. Natural base for control-agent benchmarks."
+
+  - name: "Piklema"
+    category: advisors
+    url: "https://piklema.com/"
+    open_source: false
+    country: RU
+    tags: [advisor, mining, pre-llm]
+    verdict_en: "Real-time advisor for mineral processing. Classical ML/APC. Reference for what production advisors look like."
+
+  - name: "Tsifra Digital Advisors"
+    category: advisors
+    url: "https://zyfra.com/"
+    open_source: false
+    country: RU
+    tags: [advisor, metallurgy, pre-llm]
+    verdict_en: "Metallurgy advisors. Pre-LLM generation."
+
+  - name: "SIPO (Rosatom)"
+    category: advisors
+    open_source: false
+    country: RU
+    tags: [advisor, nuclear, closed]
+    verdict_en: "NPP operator support: 360 systems, 200 procedures, 30-min forecast. No public implementation."
+
+  - name: "AgentOps"
+    category: adjacent-tools
+    url: "https://github.com/AgentOps-AI/agentops"
+    open_source: true
+    tags: [observability, evals]
+    verdict_en: "Tracing and replay for agents. Directly applicable in industrial deployments."
+
+  - name: "DSPY"
+    category: adjacent-tools
+    url: "https://github.com/stanfordnlp/dspy"
+    open_source: true
+    tags: [prompt-optimization]
+    verdict_en: "Compilable-prompt approach. Relevant for evals-heavy industrial workflows."
+
+  - name: "E2B"
+    category: adjacent-tools
+    url: "https://github.com/e2b-dev/E2B"
+    open_source: true
+    tags: [sandbox]
+    verdict_en: "Sandboxed code execution. Conceptually related to shadow-mode for OT agents."
+
+  - name: "Cognee"
+    category: adjacent-tools
+    url: "https://github.com/topoteretes/cognee"
+    open_source: true
+    tags: [knowledge-graph]
+    verdict_en: "Knowledge-graph layer. Useful for regulation/procedure grounding."
+
+gaps:
+  - category: protocol-bridges
+    description: "Production-quality Modbus MCP server"
+  - category: protocol-bridges
+    description: "Historian MCP server (PI, Alpha.Historian, Aveva)"
+  - category: guardrails
+    description: "OT-aware policy layer (process-semantics aware guardrails)"
+  - category: benchmarks
+    description: "Closed-loop process control benchmark for agents"
+  - category: simulators
+    description: "Batch-process simulators (concrete, hydroponics, food)"
+  - category: advisors
+    description: "Open-source LLM operator advisor reference implementation"
+  - category: predictive-maintenance
+    description: "LLM-augmented predictive maintenance projects"
+  - category: computer-vision
+    description: "Agentic (not classifier-only) VLMs for industrial CV"
+  - category: digital-twin
+    description: "Reproducible digital-twin + LLM implementations"
+  - category: research-standards
+    description: "Open-source ISA-18.2 alarm-management logic for agents"
