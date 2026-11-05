@@ -72,6 +72,14 @@ projects:
     summary_en: "MCP server for OPC UA. Read/write node values, browse namespace. No policy layer."
     verdict_en: "Useful as starting reference, unsafe in production without guardrail wrapper."
 
+  - name: "IndustriAgents/OPCUA-MCP"
+    category: protocol-bridges
+    url: "https://github.com/IndustriAgents/OPCUA-MCP"
+    open_source: true
+    tags: [opc-ua, mcp]
+    summary_en: "Local MCP bridge for OPC UA browsing, live and historical data, subscriptions, events and alarms. Read-only by default."
+    verdict_en: "Runnable in Python or Node with a mock server. Uses local stdio and one OPC UA endpoint per process. Real equipment requires a secured OPC UA channel."
+
   - name: "Siemens WinCC OA MCP Server"
     category: protocol-bridges
     url: "https://www.winccoa.com/"

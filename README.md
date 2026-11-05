@@ -56,6 +56,10 @@ MCP server for **WinCC Unified** (a different Siemens SCADA product from WinCC O
 Small reference MCP server for OPC UA. Five tools: read node, write node, browse namespace, read multiple, write multiple. No policy layer, no scoping, no auth model — write access is unrestricted.
 **Verdict:** 6 stars, last activity May 2025 — this is an educational example, not a production tool. Included as the "naive baseline" that illustrates why OT-aware policy layers matter.
 
+### [IndustriAgents/OPCUA-MCP](https://github.com/IndustriAgents/OPCUA-MCP) — Local OPC UA bridge for MCP clients
+Browse OPC UA address spaces, read current and historical data, and monitor subscriptions, events and alarms. The default profile prevents writes and method calls.
+**Verdict:** Runnable in Python or Node with a mock server for testing. It uses local stdio and connects to one OPC UA endpoint per process; real equipment requires a secured OPC UA channel.
+
 ### 🚧 Modbus MCP server — no production-quality entry yet
 Several small experiments exist; nothing recommended in v0.2. Contributions welcome.
 
