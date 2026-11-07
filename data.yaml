@@ -426,7 +426,7 @@ projects:
     url: "https://github.com/NVIDIA-NeMo/Guardrails"
     open_source: true
     license: null
-    stars: 7445
+    stars: 7446
     pushed: 2026-11-07
     archived: false
     tags: [guardrails, general-purpose, colang]
