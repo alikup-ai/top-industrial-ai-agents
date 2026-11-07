@@ -6,7 +6,7 @@
 # `stars`, `pushed` and `archived` are refreshed by `python update_stars.py`
 # (and weekly by .github/workflows/refresh-metrics.yml). Do not hand-edit them.
 
-version: 0.3
+version: 0.3.1
 last_updated: 2026-11-07
 last_verified: 2026-11-07
 
@@ -414,7 +414,7 @@ projects:
     url: "https://github.com/meta-llama/PurpleLlama"
     open_source: true
     license: null
-    stars: 4466
+    stars: 4467
     pushed: 2026-10-30
     archived: false
     paper: "2505.03574"
@@ -431,6 +431,19 @@ projects:
     archived: false
     tags: [guardrails, general-purpose, colang]
     verdict_en: "Five rail types, Colang policy language, plausibly extensible to industrial rules. Moved from NVIDIA/NeMo-Guardrails — v0.1 of this file had the stale path."
+
+  - name: "alikup-ai/otgate"
+    category: guardrails
+    url: "https://github.com/alikup-ai/otgate"
+    open_source: true
+    license: Apache-2.0
+    stars: 0
+    pushed: 2026-11-07
+    archived: false
+    maintainer_own_project: true
+    tags: [opc-ua, mcp, process-semantics, interlocks, rate-limit, human-approval, fail-closed, owasp-asi02]
+    summary_en: "Authorization gateway between an agent and an OPC UA server, and itself an MCP server. Per-tag deny-by-default policy in process terms: value_range, max_rate over rate_interval, interlocks reading live guard tags, cumulative_range over a window against sliced moves, max_calls against call storms. Writes can require human approval on a physically separate authenticated channel, re-checked against current process state before execution. Shadow mode. Unverifiable safety conditions fail closed. 142 tests incl. live opc.tcp:// integration."
+    verdict_en: "DISCLOSURE: this list's maintainer's own project, listed because v0.3 wrongly declared its niche empty. The only open implementation of the process-semantics envelope category — and alpha: zero stars, no forks, no field deployment, one author. Unmaintained July-November 2026, during which an mcp major release broke its install; that and two baseline defects in its own core checks (rate and drift measured against gateway memory rather than the live process, letting a 144-unit jump pass a 5-per-60s policy) were fixed in November. The design is the right shape for OT; the implementation has had one careful pass and no adversarial contact with a real plant."
 
   - name: "sint-ai/sint-protocol"
     category: guardrails
@@ -598,7 +611,7 @@ projects:
     open_source: true
     license: MIT
     stars: 109
-    pushed: 2026-11-06
+    pushed: 2026-11-07
     archived: false
     doi: "10.5281/zenodo.17611542"
     tags: [predictive-maintenance, vibration, condition-monitoring, iso-20816, mcp, recommended]
@@ -658,8 +671,8 @@ projects:
     url: "https://github.com/topoteretes/cognee"
     open_source: true
     license: Apache-2.0
-    stars: 33119
-    pushed: 2026-11-06
+    stars: 33121
+    pushed: 2026-11-07
     archived: false
     tags: [knowledge-graph]
     verdict_en: "Knowledge-graph layer. Useful for grounding agents in regulations, SOPs and P&IDs."
@@ -669,7 +682,7 @@ projects:
     url: "https://github.com/e2b-dev/E2B"
     open_source: true
     license: Apache-2.0
-    stars: 14756
+    stars: 14758
     pushed: 2026-11-06
     archived: false
     tags: [sandbox]
@@ -680,7 +693,7 @@ projects:
     url: "https://github.com/AgentOps-AI/agentops"
     open_source: true
     license: MIT
-    stars: 5949
+    stars: 5948
     pushed: 2026-06-25
     archived: false
     tags: [observability, evals]
@@ -842,9 +855,24 @@ papers:
 # Niches with no credible entry. Re-checked 2026-11-07.
 gaps:
   - category: guardrails
-    description: "Process-semantics-aware safety envelope: rate-of-change limits, interlock awareness, mode-dependent envelopes, cross-tag constraints. What exists governs the agent; nothing governs the physics."
-    status: open
-    note: "The only one of v0.2's protocol and guardrail gaps that has not moved. Clearest open niche in the field."
+    description: "Process-semantics-aware safety envelope. What exists governs the agent; governing the physics needs a different kind of policy."
+    status: partially-addressed
+    addressed_by: ["alikup-ai/otgate"]
+    note: >-
+      CORRECTED in v0.3.1. v0.3 claimed nothing open understood the process.
+      Wrong: otgate did, and existed when v0.3 was written. Still missing, and
+      these are the real open parts: (1) field validation — one alpha project
+      with zero stars and no deployment is not a solved category; (2) cross-tag
+      constraints — envelopes are per tag everywhere, otgate included, so an
+      agent spreading its effect across several tags is caught by nothing;
+      (3) mode-dependent envelopes — no open project expresses "this range
+      applies only in these process modes"; (4) trend awareness — the live value
+      says where the process is, not how it got there; (5) a vendor-neutral
+      vocabulary — text guardrails have Colang/OPA/Cedar, process envelopes have
+      one project's YAML dialect, and nobody has mapped ISA-88 modes or ISA-18.2
+      alarm states onto agent policy. Still the clearest open niche in the
+      field — not because it is empty, but because what exists is one unproven
+      implementation and four of its five hard parts are untouched.
   - category: benchmarks
     description: "Closed-loop process control benchmark — agent as supervisor of a running dynamic process, scored on safety-envelope violations, intervention count and diagnostic quality under alarm floods."
     status: open
