@@ -1,0 +1,58 @@
+name: Refresh metrics
+
+# The root cause of v0.2 going stale was that nothing ever re-checked it.
+# This runs update_stars.py weekly and commits the result, so star counts,
+# last-push dates and archived flags in data.yaml cannot drift unnoticed.
+
+on:
+  schedule:
+    - cron: "17 6 * * 1"   # Mondays 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pyyaml
+
+      - name: Refresh data.yaml
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python update_stars.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- data.yaml; then
+            echo "No metric changes this week."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data.yaml
+          git commit -m "chore: weekly metric refresh"
+          git push
+
+      - name: Flag entries needing human review
+        run: |
+          # Surface newly-archived projects in the run summary. An archived
+          # dependency is a content problem, not a metric problem, so it needs
+          # a human to rewrite the entry rather than just bump a number.
+          if grep -n "archived: true" data.yaml; then
+            {
+              echo "### Archived projects in data.yaml"
+              echo
+              echo "These entries must carry a 📦 marker and an explicit"
+              echo "'do not start new work on it' note in both READMEs:"
+              echo
+              grep -B 12 "archived: true" data.yaml | grep "  - name:" || true
+            } >> "$GITHUB_STEP_SUMMARY"
+          fi
