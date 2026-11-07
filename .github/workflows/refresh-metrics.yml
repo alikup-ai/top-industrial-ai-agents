@@ -35,8 +35,13 @@ jobs:
             echo "No metric changes this week."
             exit 0
           fi
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Commit as the repository owner, not as github-actions[bot]:
+          # the bot otherwise shows up in the repository's contributor list for
+          # what is really just an automated metric bump. The noreply address is
+          # GitHub's own per-account alias, so the commit is attributed without
+          # publishing a real email address in a public workflow file.
+          git config user.name  "Ali K."
+          git config user.email "234882455+alikup-ai@users.noreply.github.com"
           git add data.yaml
           git commit -m "chore: weekly metric refresh"
           git push
