@@ -1,16 +1,27 @@
 # Structured data for top-industrial-ai-agents
-# This file is the source of truth. READMEs may be generated from it in future versions.
-# For v0.1 the READMEs are hand-written; this file mirrors them for future automation.
+#
+# This file mirrors README.md. Both are maintained together: if you add a project
+# to one, add it to the other in the same PR.
+#
+# `stars`, `pushed` and `archived` are refreshed by `python update_stars.py`
+# (and weekly by .github/workflows/refresh-metrics.yml). Do not hand-edit them.
 
-version: 0.1
-last_updated: 2026-07-22
+version: 0.3
+last_updated: 2026-11-07
+last_verified: 2026-11-07
 
 categories:
   - id: protocol-bridges
     name_en: "Industrial Protocol Bridges"
     name_ru: "Мосты к промышленным протоколам"
     icon: "🔌"
-    description_en: "MCP/agent connectors for OPC UA, Modbus, MQTT, Historian"
+    description_en: "MCP/agent connectors for OPC UA, Modbus, MQTT, S7, Historian"
+
+  - id: plc-engineering
+    name_en: "PLC & Engineering-Tool Agents"
+    name_ru: "Агенты для PLC и инженерных средств"
+    icon: "🏗️"
+    description_en: "Agents inside TIA Portal, GX Works, Ignition Designer"
 
   - id: guardrails
     name_en: "OT-Aware Guardrails & Policy Layers"
@@ -60,131 +71,811 @@ categories:
 
   - id: adjacent-tools
     name_en: "Adjacent Tools Worth Knowing"
-    name_ru: "Смежные инструменты, которые стоит знать"
+    name_ru: "Смежные инструменты"
     icon: "🧰"
 
+  - id: chinese-ecosystem
+    name_en: "Chinese Ecosystem"
+    name_ru: "Китайская экосистема"
+    icon: "🇨🇳"
+
 projects:
+
+  # ---------- protocol bridges: OPC UA ----------
+  - name: "IndustriAgents/OPCUA-MCP"
+    category: protocol-bridges
+    url: "https://github.com/IndustriAgents/OPCUA-MCP"
+    open_source: true
+    license: MIT
+    stars: 31
+    pushed: 2026-11-05
+    archived: false
+    tags: [opc-ua, mcp, python, nodejs, read-only-default, recommended]
+    summary_en: "Python and Node OPC UA MCP behind one tool contract. PyPI + npm, CI, .mcpb bundle, bundled plant simulator. Read-only by default; writes need a control profile, an authenticated server, allowlisted targets and are audited."
+    verdict_en: "The default recommendation for connecting an agent to an OPC UA endpoint. Closest thing in open source to OT-appropriate access control at the bridge layer."
+
   - name: "kukapay/opcua-mcp"
     category: protocol-bridges
     url: "https://github.com/kukapay/opcua-mcp"
     open_source: true
-    tags: [opc-ua, mcp]
-    summary_en: "MCP server for OPC UA. Read/write node values, browse namespace. No policy layer."
-    verdict_en: "Useful as starting reference, unsafe in production without guardrail wrapper."
+    license: MIT
+    stars: 31
+    pushed: 2025-10-29
+    archived: false
+    tags: [opc-ua, mcp, educational]
+    summary_en: "Minimal OPC UA MCP. Five tools: read, write, browse, read-multiple, write-multiple. No policy layer, no scoping, no auth model."
+    verdict_en: "Educational example, not production. Useful as the naive baseline that shows why bridge-level profiles matter. v0.2 of this list reported 6 stars and May 2025 activity; both were wrong."
 
-  - name: "Siemens WinCC OA MCP Server"
+  - name: "shriramkv/opcua-mcp"
     category: protocol-bridges
-    url: "https://www.winccoa.com/"
-    open_source: false
-    tags: [opc-ua, mqtt, mcp, vendor]
-    summary_en: "Official MCP server from Siemens for WinCC OA — datapoint read/write, OPC UA/MQTT."
-    verdict_en: "First vendor-published MCP for industrial SCADA. Vendor-locked but signals mainstream adoption."
+    url: "https://github.com/shriramkv/opcua-mcp"
+    open_source: true
+    license: null
+    stars: 25
+    pushed: 2026-07-26
+    archived: false
+    tags: [opc-ua, mcp]
+    verdict_en: "Exposes OPC UA sources as 'safe, permissioned' tools. No license file — check before use."
 
-  - name: "LlamaFirewall"
+  - name: "mwieczorkiewicz/opcua-mcp"
+    category: protocol-bridges
+    url: "https://github.com/mwieczorkiewicz/opcua-mcp"
+    open_source: true
+    license: MIT
+    stars: 5
+    pushed: 2026-10-28
+    archived: false
+    tags: [opc-ua, mcp, go, robotics]
+    verdict_en: "Go implementation aimed at robots and PLCs."
+
+  - name: "AndreasHeine/i3x2ua"
+    category: protocol-bridges
+    url: "https://github.com/AndreasHeine/i3x2ua"
+    open_source: true
+    license: AGPL-3.0
+    stars: 19
+    pushed: 2026-11-06
+    archived: false
+    tags: [opc-ua, mcp, i3x, rest]
+    verdict_en: "Turns any OPC UA server into an i3X-compliant REST and MCP API. From a known OPC UA community contributor."
+
+  - name: "node-opcua/node-opcua-modeler-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/node-opcua/node-opcua-modeler-mcp-server"
+    open_source: true
+    license: Apache-2.0
+    stars: 2
+    pushed: 2026-10-23
+    archived: false
+    tags: [opc-ua, mcp, information-modeling]
+    verdict_en: "From the node-opcua project itself. Addresses address-space modeling and companion-spec discovery, not data access."
+
+  - name: "marcschier/opcuakb-mcp"
+    category: protocol-bridges
+    url: "https://github.com/marcschier/opcuakb-mcp"
+    open_source: true
+    license: MIT
+    stars: 2
+    pushed: 2026-10-26
+    archived: false
+    tags: [opc-ua, mcp, knowledge-base, csharp]
+
+  - name: "AddisonTech/Hermes"
+    category: protocol-bridges
+    url: "https://github.com/AddisonTech/Hermes"
+    open_source: true
+    license: MIT
+    stars: 2
+    pushed: 2026-06-15
+    archived: false
+    tags: [opc-ua, mcp, rust]
+
+  # ---------- protocol bridges: Modbus ----------
+  - name: "kukapay/modbus-mcp"
+    category: protocol-bridges
+    url: "https://github.com/kukapay/modbus-mcp"
+    open_source: true
+    license: MIT
+    stars: 26
+    pushed: 2025-05-12
+    archived: false
+    tags: [modbus, mcp]
+    verdict_en: "Standardizes and contextualizes Modbus data for agents. Existed before this list was written and was missed in v0.2, which wrongly declared the Modbus niche empty. No policy layer."
+
+  - name: "IndustriAgents/IndustriConnect"
+    category: protocol-bridges
+    url: "https://github.com/IndustriAgents/IndustriConnect"
+    open_source: true
+    license: MIT
+    stars: 10
+    pushed: 2026-11-05
+    archived: false
+    tags: [modbus, multi-protocol, mcp, typescript]
+    verdict_en: "Multi-protocol device-to-agent connector."
+
+  # ---------- protocol bridges: Historian ----------
+  - name: "chewcw/aveva-historian-mcpserver"
+    category: protocol-bridges
+    url: "https://github.com/chewcw/aveva-historian-mcpserver"
+    open_source: true
+    license: null
+    stars: 0
+    pushed: 2026-08-15
+    archived: false
+    tags: [historian, aveva, mcp, go]
+    verdict_en: "First public MCP for a named historian product, closing the gap v0.2 described as 'none identified'. Zero stars, no license file — early, but exactly on target."
+
+  # ---------- protocol bridges: MQTT / Sparkplug ----------
+  - name: "ezhuk/mqtt-mcp"
+    category: protocol-bridges
+    url: "https://github.com/ezhuk/mqtt-mcp"
+    open_source: true
+    license: MIT
+    stars: 25
+    pushed: 2026-10-31
+    archived: false
+    tags: [mqtt, mcp]
+
+  - name: "Benniu/emqx-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/Benniu/emqx-mcp-server"
+    open_source: true
+    license: Apache-2.0
+    stars: 27
+    pushed: 2026-02-07
+    archived: false
+    tags: [mqtt, emqx, mcp]
+
+  - name: "emqx/uns-demo"
+    category: protocol-bridges
+    url: "https://github.com/emqx/uns-demo"
+    open_source: true
+    license: null
+    stars: 9
+    pushed: 2025-05-24
+    archived: false
+    tags: [sparkplug, uns, mcp, demo]
+    verdict_en: "EMQX's own demo of natural-language exploration of Sparkplug B data over MCP. A demo, but a clean Unified Namespace + agent reference."
+
+  - name: "AddisonTech/Iris"
+    category: protocol-bridges
+    url: "https://github.com/AddisonTech/Iris"
+    open_source: true
+    license: null
+    stars: 1
+    pushed: 2026-10-26
+    archived: false
+    tags: [mqtt, sparkplug, mcp, rest]
+
+  # ---------- protocol bridges: vendor SCADA/DCS ----------
+  - name: "winccoa/winccoa-ae-js-mcpserver"
+    category: protocol-bridges
+    url: "https://github.com/winccoa/winccoa-ae-js-mcpserver"
+    open_source: true
+    license: null
+    stars: 27
+    pushed: 2026-10-01
+    archived: false
+    vendor: Siemens
+    tags: [opc-ua, mqtt, mcp, vendor, wincc-oa, scada]
+    summary_en: "Official Siemens MCP for WinCC OA. Datapoints read/write/create, OPC UA and MQTT, dashboards, alarms, archives, Pmon, PV range validation. Write-exclusion model lets admins disable whole tool categories."
+    verdict_en: "Still the only MCP published by a top-tier automation vendor. Note: v0.1 of this file listed Siemens by marketing URL (winccoa.com) instead of this repository."
+
+  - name: "vogler75/winccua-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/vogler75/winccua-mcp-server"
+    open_source: true
+    license: GPL-3.0
+    stars: 15
+    pushed: 2025-07-17
+    archived: false
+    tags: [wincc-unified, graphql, mcp, scada]
+    verdict_en: "Third-party MCP for WinCC Unified via GraphQL. Not to be confused with the official OA server."
+
+  - name: "vogler75/winccv8-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/vogler75/winccv8-mcp-server"
+    open_source: true
+    license: GPL-3.0
+    stars: 13
+    pushed: 2025-10-15
+    archived: false
+    tags: [wincc-v8, mcp, scada]
+    verdict_en: "Same author as the WinCC Unified server, for WinCC V8. Missed in v0.2."
+
+  - name: "Nodeblue-AI/ignition-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/Nodeblue-AI/ignition-mcp-server"
+    open_source: true
+    license: MIT
+    stars: 12
+    pushed: 2026-09-24
+    archived: false
+    tags: [ignition, mcp, scada]
+
+  - name: "Nodeblue-AI/bridge-mcp-server"
+    category: protocol-bridges
+    url: "https://github.com/Nodeblue-AI/bridge-mcp-server"
+    open_source: true
+    license: MIT
+    stars: 10
+    pushed: 2026-09-24
+    archived: false
+    tags: [ignition, mcp, correlation]
+
+  - name: "smithaldon1/deltav-mcp"
+    category: protocol-bridges
+    url: "https://github.com/smithaldon1/deltav-mcp"
+    open_source: true
+    license: GPL-3.0
+    stars: 2
+    pushed: 2026-05-07
+    archived: false
+    vendor: Emerson
+    tags: [deltav, dcs, opc-ua, mcp]
+    verdict_en: "First public MCP touching a major DCS."
+
+  - name: "zavora-ai/mcp-scada"
+    category: protocol-bridges
+    url: "https://github.com/zavora-ai/mcp-scada"
+    open_source: true
+    license: null
+    stars: 3
+    pushed: 2026-08-13
+    archived: false
+    tags: [scada, mcp, rust, energy]
+    verdict_en: "Self-described critical-risk industrial-control MCP. Treat the framing with caution; included for completeness."
+
+  # ---------- protocol bridges: multi-protocol ----------
+  - name: "industrial-aiops/industrial-aiops"
+    category: protocol-bridges
+    url: "https://github.com/industrial-aiops/industrial-aiops"
+    open_source: true
+    license: MIT
+    stars: 10
+    pushed: 2026-11-04
+    archived: false
+    also_in: [guardrails, predictive-maintenance, research-standards]
+    tags: [multi-protocol, opc-ua, modbus, s7, ethernet-ip, bacnet, sparkplug, secs-gem, governance, isa-18.2, read-first]
+    summary_en: "Read-first tap across 15 field protocols with a governance engine applying audit, budget, risk-tier and undo on every call. ISA-18.2 alarm-flood analysis, downtime root cause with cited evidence, OEE, legacy PLC program explainer. Cosign-signed non-root container, air-gap profile, deterministic engine needing no GPU or model API."
+    verdict_en: "Simultaneously closes v0.2's Modbus and historian gaps and is the first open project to treat OT governance as the product. Not yet process-semantics-aware: risk tiers are per-tool, not per-process-variable."
+
+  - name: "industrial-aiops/industrial-aiops-energy"
+    category: protocol-bridges
+    url: "https://github.com/industrial-aiops/industrial-aiops-energy"
+    open_source: true
+    license: MIT
+    stars: 2
+    pushed: 2026-10-18
+    archived: false
+    tags: [iec-104, dnp3, iec-61850, substation, read-only]
+    verdict_en: "Energy edition of the above: substation telecontrol protocols, read-only."
+
+  - name: "lwsinclair/IoT-Edge-MCP-Server"
+    category: protocol-bridges
+    url: "https://github.com/lwsinclair/IoT-Edge-MCP-Server"
+    open_source: true
+    license: MIT
+    stars: 5
+    pushed: 2025-11-14
+    archived: false
+    tags: [mqtt, scada, plc, mcp]
+
+  - name: "cadugrillo/s7-mcp-bridge"
+    category: protocol-bridges
+    url: "https://github.com/cadugrillo/s7-mcp-bridge"
+    open_source: true
+    license: MIT
+    stars: 28
+    pushed: 2026-03-20
+    archived: false
+    tags: [s7, siemens, mcp, typescript]
+    verdict_en: "Direct Siemens S7 bridge, bypassing OPC UA. Most-starred single-protocol bridge after the OPC UA pair."
+
+  # ---------- PLC & engineering-tool agents ----------
+  - name: "Arienax/gxworks-agent"
+    category: plc-engineering
+    url: "https://github.com/Arienax/gxworks-agent"
+    open_source: true
+    license: Apache-2.0
+    stars: 24
+    pushed: 2026-11-06
+    archived: false
+    also_in: [chinese-ecosystem]
+    tags: [mitsubishi, gx-works, plc-programming, mcp]
+    verdict_en: "MCP server and AI workbench for Mitsubishi PLC programming. Documentation primarily Chinese. No approve-before-download gate."
+
+  - name: "agimx-ai/seedagent-tia-programming"
+    category: plc-engineering
+    url: "https://github.com/agimx-ai/seedagent-tia-programming"
+    open_source: true
+    license: null
+    stars: 13
+    pushed: 2026-10-12
+    archived: false
+    also_in: [chinese-ecosystem]
+    tags: [siemens, tia-portal, scl, plc-programming]
+    verdict_en: "SCL generation for S7-1200/1500, compile diagnostics, .zap archiving. No license file."
+
+  - name: "gangsterke/Tia-Portal-MCP-server"
+    category: plc-engineering
+    url: "https://github.com/gangsterke/Tia-Portal-MCP-server"
+    open_source: true
+    license: null
+    stars: 10
+    pushed: 2025-10-12
+    archived: false
+    tags: [siemens, tia-portal, nodeset, mcp, csharp]
+    verdict_en: "Narrow scope: exports OPC UA nodeset files from a TIA Portal project. No license file."
+
+  # ---------- guardrails ----------
+  - name: "meta-llama/PurpleLlama — LlamaFirewall"
     category: guardrails
     url: "https://github.com/meta-llama/PurpleLlama"
     open_source: true
+    license: null
+    stars: 4466
+    pushed: 2026-10-30
+    archived: false
+    paper: "2505.03574"
     tags: [guardrails, general-purpose]
-    summary_en: "Open-source framework for LLM agent guardrails. Text-level filtering."
-    verdict_en: "Does not understand process semantics. General-purpose only."
+    verdict_en: "PromptGuard 2, AgentAlignmentCheck, CodeShield. Text-level only — no process semantics. Essential baseline, insufficient alone."
 
-  - name: "NVIDIA NeMo-Guardrails"
+  - name: "NVIDIA-NeMo/Guardrails"
     category: guardrails
-    url: "https://github.com/NVIDIA/NeMo-Guardrails"
+    url: "https://github.com/NVIDIA-NeMo/Guardrails"
     open_source: true
-    tags: [guardrails, general-purpose]
-    verdict_en: "Programmable runtime rails. General-purpose, no OT awareness."
+    license: null
+    stars: 7445
+    pushed: 2026-11-07
+    archived: false
+    tags: [guardrails, general-purpose, colang]
+    verdict_en: "Five rail types, Colang policy language, plausibly extensible to industrial rules. Moved from NVIDIA/NeMo-Guardrails — v0.1 of this file had the stale path."
 
-  - name: "SOP-Bench (Amazon)"
+  - name: "sint-ai/sint-protocol"
+    category: guardrails
+    url: "https://github.com/sint-ai/sint-protocol"
+    open_source: true
+    license: Apache-2.0
+    stars: 15
+    pushed: 2026-11-07
+    archived: false
+    tags: [runtime-governance, mcp, robotics]
+    verdict_en: "Runtime security and governance for agents, MCP tools and robots. Adjacent rather than industrial, but framed as runtime governance rather than text filtering."
+
+  - name: "protectai/llm-guard"
+    category: guardrails
+    url: "https://github.com/protectai/llm-guard"
+    open_source: true
+    license: MIT
+    stars: 3219
+    pushed: 2026-07-08
+    archived: true
+    tags: [guardrails, general-purpose, archived]
+    verdict_en: "ARCHIVED (read-only), no further development. v0.2 listed it without this caveat. Do not start new work on it."
+
+  # ---------- benchmarks ----------
+  - name: "IBM/AssetOpsBench"
+    category: benchmarks
+    url: "https://github.com/IBM/AssetOpsBench"
+    open_source: true
+    license: null
+    stars: 2411
+    pushed: 2026-11-05
+    archived: false
+    paper: "2506.03828"
+    also_in: [predictive-maintenance]
+    tags: [benchmark, maintenance, mcp, industry-4-0]
+    verdict_en: "460+ scenarios, 5 specialist agents, orchestration blueprints, all over MCP. IJCAI 2026 challenge. Asset lifecycle, not real-time process supervision."
+
+  - name: "amazon-science/SOP-Bench"
     category: benchmarks
     url: "https://github.com/amazon-science/SOP-Bench"
     open_source: true
+    license: null
+    stars: 46
+    pushed: 2026-08-27
+    archived: false
+    paper: "2506.08119"
     tags: [benchmark, sop]
-    verdict_en: "2000+ SOP tasks across 12 domains. Not process control."
+    verdict_en: "2000+ tasks, 12 domains, expert-authored SOPs. Function-calling agents average ~64% task success. Industrially adjacent, not process control."
 
-  - name: "AssetOpsBench (IBM)"
+  - name: "Leezekun/SOPBench"
     category: benchmarks
-    url: "https://github.com/ibm/AssetOpsBench"
+    url: "https://github.com/Leezekun/SOPBench"
     open_source: true
-    tags: [benchmark, maintenance]
-    verdict_en: "Asset ops & maintenance benchmark with leaderboard. Not real-time process supervision."
+    license: null
+    stars: 26
+    pushed: 2026-09-13
+    archived: false
+    tags: [benchmark, sop]
+    verdict_en: "Seven customer-service domains. Narrower than Amazon's, methodologically distinct, useful for triangulation. Note the different capitalization."
 
-  - name: "Tennessee Eastman Process"
+  # ---------- simulators ----------
+  - name: "ccreinartz11/pytep"
+    category: simulators
+    url: "https://github.com/ccreinartz11/pytep"
+    open_source: true
+    license: null
+    stars: 45
+    pushed: 2022-01-09
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, python, recommended]
+    verdict_en: "pyTEP, high-level Python API for interactive TEP simulation. Recommended entry point for agent supervision experiments."
+
+  - name: "camaramm/tennessee-eastman-profBraatz"
     category: simulators
     url: "https://github.com/camaramm/tennessee-eastman-profBraatz"
     open_source: true
-    tags: [simulator, chemical]
-    verdict_en: "Classic chemical plant simulator. Natural base for control-agent benchmarks."
+    license: null
+    stars: 191
+    pushed: 2022-05-30
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, fortran]
 
-  - name: "Piklema"
+  - name: "jkitchin/tennessee-eastman-profbraatz"
+    category: simulators
+    url: "https://github.com/jkitchin/tennessee-eastman-profbraatz"
+    open_source: true
+    license: null
+    stars: 32
+    pushed: 2025-12-12
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, fortran, f2py]
+
+  - name: "camaramm/tep2py"
+    category: simulators
+    url: "https://github.com/camaramm/tep2py"
+    open_source: true
+    license: null
+    stars: 16
+    pushed: 2021-09-28
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, python]
+
+  - name: "usnistgov/tesim"
+    category: simulators
+    url: "https://github.com/usnistgov/tesim"
+    open_source: true
+    license: null
+    stars: 3
+    pushed: 2018-06-27
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, nist, cybersecurity]
+    verdict_en: "NIST version for wireless and cybersecurity research. Last touched 2018."
+
+  - name: "ElsevierSoftwareX/SOFTX-D-24-00664"
+    category: simulators
+    url: "https://github.com/ElsevierSoftwareX/SOFTX-D-24-00664"
+    open_source: true
+    license: null
+    stars: 5
+    pushed: 2024-12-09
+    archived: false
+    tags: [simulator, chemical, tennessee-eastman, simulink]
+    verdict_en: "COSTEP, complete open Simulink model of TEP."
+
+  - name: "YuchenXia/LLMDrivenSimulation"
+    category: simulators
+    url: "https://github.com/YuchenXia/LLMDrivenSimulation"
+    open_source: true
+    license: CC-BY-4.0
+    stars: 33
+    pushed: 2026-06-18
+    archived: false
+    also_in: [digital-twin]
+    tags: [simulation, digital-twin, llm]
+    verdict_en: "LLM system interacting with simulation models in digital twins. Closest published work to 'agent drives a simulator'."
+
+  # ---------- advisors ----------
+  - name: "Piklema Predictive"
     category: advisors
     url: "https://piklema.com/"
     open_source: false
     country: RU
-    tags: [advisor, mining, pre-llm]
-    verdict_en: "Real-time advisor for mineral processing. Classical ML/APC. Reference for what production advisors look like."
+    tags: [advisor, mining, pre-llm, closed]
+    verdict_en: "Driver Assistant for open-pit dump truck operators, claimed 3-5% fuel savings. Series A $12.82M July 2025. Driver-behaviour optimization, not process control. Instructive for trust boundaries and operator UX."
 
-  - name: "Tsifra Digital Advisors"
+  - name: "Zyfra (Цифра)"
     category: advisors
-    url: "https://zyfra.com/"
+    url: "https://www.zyfra.com/"
     open_source: false
     country: RU
-    tags: [advisor, metallurgy, pre-llm]
-    verdict_en: "Metallurgy advisors. Pre-LLM generation."
+    tags: [advisor, metallurgy, mining, pre-llm, closed]
+    verdict_en: "Largest Russian-speaking industrial IIoT vendor: ZIIoT, MDC Plus, Zyfra AI, Zyfra EYE. All pre-LLM. The baseline LLM advisors will be measured against in this market."
 
-  - name: "SIPO (Rosatom)"
+  - name: "SIPO (Rosatom, Novovoronezh NPP)"
     category: advisors
     open_source: false
     country: RU
     tags: [advisor, nuclear, closed]
-    verdict_en: "NPP operator support: 360 systems, 200 procedures, 30-min forecast. No public implementation."
+    verdict_en: "NPP operator support: ~360 systems, ~200 procedures, 30-minute forecast horizon. No public implementation or SDK. Architecture target only."
 
-  - name: "AgentOps"
-    category: adjacent-tools
-    url: "https://github.com/AgentOps-AI/agentops"
+  # ---------- predictive maintenance ----------
+  - name: "LGDiMaggio/predictive-maintenance-mcp"
+    category: predictive-maintenance
+    url: "https://github.com/LGDiMaggio/predictive-maintenance-mcp"
     open_source: true
-    tags: [observability, evals]
-    verdict_en: "Tracing and replay for agents. Directly applicable in industrial deployments."
+    license: MIT
+    stars: 109
+    pushed: 2026-11-06
+    archived: false
+    doi: "10.5281/zenodo.17611542"
+    tags: [predictive-maintenance, vibration, condition-monitoring, iso-20816, mcp, recommended]
+    summary_en: "43 endpoints (40 tools, 3 prompts) for vibration diagnostics: envelope-spectrum analysis, bearing fault-frequency matching, ISO 20816-3 severity, anomaly detection on user baselines, interactive HTML reports. Ships 20 real bearing measurements. Also a Claude Code plugin with 9 skills."
+    verdict_en: "Closes v0.2's 'thin' predictive-maintenance category outright. Core design rule: the server refuses to guess — a fault indication requires matching spectral evidence, and severity wording is server-authored, not model-improvised. Best-engineered project in this list by the stated curation criteria."
 
-  - name: "DSPY"
+  - name: "arcspots/FactoryMindAI"
+    category: predictive-maintenance
+    url: "https://github.com/arcspots/FactoryMindAI"
+    open_source: true
+    license: null
+    stars: 5
+    pushed: 2026-08-07
+    archived: false
+    tags: [predictive-maintenance, prescriptive]
+    verdict_en: "Early-stage, no license file."
+
+  # ---------- digital twin ----------
+  - name: "j03rul4nd/digital-twin-water"
+    category: digital-twin
+    url: "https://github.com/j03rul4nd/digital-twin-water"
+    open_source: true
+    license: null
+    stars: 10
+    pushed: 2026-04-17
+    archived: false
+    tags: [digital-twin, water-treatment, threejs]
+    verdict_en: "Runnable water-treatment twin scoped to 'working in 30 minutes'. No license file."
+
+  # ---------- research & standards ----------
+  - name: "cbvance/AlarmsByTheNumbers"
+    category: research-standards
+    url: "https://github.com/cbvance/AlarmsByTheNumbers"
+    open_source: true
+    license: MIT
+    stars: 0
+    pushed: 2026-10-17
+    archived: false
+    tags: [isa-18.2, eemua-191, alarm-management, ignition, python]
+    summary_en: "almetrics reconstructs alarm episodes from an Ignition alarm_events journal and computes ISA-18.2 and EEMUA 191 benchmark metrics: floods, chattering, fleeting, stale and standing alarms, bad-actor ranking, master alarm database workbook, before-and-after proof report."
+    verdict_en: "Closes v0.2's 'no open ISA-18.2 implementation' gap. Companion code to Alarm Rationalization by the Numbers (Charles Vance, LearnSCADA, 2026). Zero stars and exactly on target — a reminder that stars are a weak signal in this niche."
+
+  # ---------- adjacent tools ----------
+  - name: "stanfordnlp/dspy"
     category: adjacent-tools
     url: "https://github.com/stanfordnlp/dspy"
     open_source: true
+    license: MIT
+    stars: 38964
+    pushed: 2026-11-06
+    archived: false
     tags: [prompt-optimization]
-    verdict_en: "Compilable-prompt approach. Relevant for evals-heavy industrial workflows."
+    verdict_en: "Compilable-prompt framework. Relevant for evals-heavy industrial workflows. v0.2 said '~35k stars'."
 
-  - name: "E2B"
-    category: adjacent-tools
-    url: "https://github.com/e2b-dev/E2B"
-    open_source: true
-    tags: [sandbox]
-    verdict_en: "Sandboxed code execution. Conceptually related to shadow-mode for OT agents."
-
-  - name: "Cognee"
+  - name: "topoteretes/cognee"
     category: adjacent-tools
     url: "https://github.com/topoteretes/cognee"
     open_source: true
+    license: Apache-2.0
+    stars: 33119
+    pushed: 2026-11-06
+    archived: false
     tags: [knowledge-graph]
-    verdict_en: "Knowledge-graph layer. Useful for regulation/procedure grounding."
+    verdict_en: "Knowledge-graph layer. Useful for grounding agents in regulations, SOPs and P&IDs."
 
+  - name: "e2b-dev/E2B"
+    category: adjacent-tools
+    url: "https://github.com/e2b-dev/E2B"
+    open_source: true
+    license: Apache-2.0
+    stars: 14756
+    pushed: 2026-11-06
+    archived: false
+    tags: [sandbox]
+    verdict_en: "Sandboxed code execution. Conceptually related to shadow-mode for OT agents."
+
+  - name: "AgentOps-AI/agentops"
+    category: adjacent-tools
+    url: "https://github.com/AgentOps-AI/agentops"
+    open_source: true
+    license: MIT
+    stars: 5949
+    pushed: 2026-06-25
+    archived: false
+    tags: [observability, evals]
+    verdict_en: "Tracing and replay for agents. Last repository activity June 2026 — check before depending on it. Not Microsoft's Azure/agentops."
+
+  - name: "pnoker/iot-dc3"
+    category: adjacent-tools
+    url: "https://github.com/pnoker/iot-dc3"
+    open_source: true
+    license: null
+    stars: 1266
+    pushed: 2026-11-01
+    archived: false
+    tags: [iiot-platform, java]
+    verdict_en: "Open-source IIoT platform repositioned around connecting physical devices to AI. Largest industrial-adjacent codebase in this list."
+
+  - name: "anviod/edgeCore"
+    category: adjacent-tools
+    url: "https://github.com/anviod/edgeCore"
+    open_source: true
+    license: null
+    stars: 135
+    pushed: 2026-11-02
+    archived: false
+    tags: [industrial-edge, go]
+
+  - name: "slalaure/korelate"
+    category: adjacent-tools
+    url: "https://github.com/slalaure/korelate"
+    open_source: true
+    license: Apache-2.0
+    stars: 27
+    pushed: 2026-05-27
+    archived: false
+    tags: [uns, unified-namespace, operations]
+    verdict_en: "AI-powered Unified Namespace operations center. The UNS layer is where agent-era industrial data architecture is heading."
+
+  - name: "TobiasLante/node-red-contrib-mcp"
+    category: adjacent-tools
+    url: "https://github.com/TobiasLante/node-red-contrib-mcp"
+    open_source: true
+    license: Apache-2.0
+    stars: 15
+    pushed: 2026-02-23
+    archived: false
+    tags: [node-red, mcp]
+    verdict_en: "MCP nodes for Node-RED. Low-friction way to put an agent next to existing plant integrations."
+
+  - name: "akya-dev/AyMON"
+    category: adjacent-tools
+    url: "https://github.com/akya-dev/AyMON"
+    open_source: true
+    license: null
+    stars: 12
+    pushed: 2026-11-07
+    archived: false
+    tags: [scada, iiot, monitoring]
+
+  # ---------- chinese ecosystem ----------
+  - name: "iduyuhe/zhiyan-evolviq"
+    category: chinese-ecosystem
+    url: "https://github.com/iduyuhe/zhiyan-evolviq"
+    open_source: true
+    license: Apache-2.0
+    stars: 13
+    pushed: 2026-10-17
+    archived: false
+    tags: [industrial-agent-platform, china]
+    verdict_en: "智衍 EvolvIQ. 25 industrial agents across production line, management and supply chain. Self-described as the first open AI-native industrial agent platform."
+
+  - name: "hanshiyingbing/chemon"
+    category: chinese-ecosystem
+    url: "https://github.com/hanshiyingbing/chemon"
+    open_source: true
+    license: MIT
+    stars: 6
+    pushed: 2026-03-21
+    archived: false
+    tags: [chemical, multi-agent, china]
+    verdict_en: "CHEMON, multi-agent orchestration for chemical processes."
+
+  - name: "ESEAI-Lab/LLM-MCP-OPCUA-Agent"
+    category: chinese-ecosystem
+    url: "https://github.com/ESEAI-Lab/LLM-MCP-OPCUA-Agent"
+    open_source: true
+    license: MIT
+    stars: 2
+    pushed: 2026-03-10
+    archived: false
+    tags: [opc-ua, mcp, robotics, china]
+    verdict_en: "Natural-language control of industrial robots over OPC UA via MCP, including dual-arm coordination."
+
+# Papers referenced in README.md. All arXiv IDs verified to resolve 2026-11-07.
+papers:
+  - id: "2610.26941"
+    title: "Industrial Agentic AI: LLM-Driven New-Generation Agents for Smart Manufacturing"
+    category: research-standards
+    note: "Survey. Best starting point for the field."
+  - id: "2610.18426"
+    title: "Evidence-Governed Deployment Readiness for Networked Agents on Industrial OT Infrastructure"
+    category: guardrails
+    note: "Most on-topic paper published since v0.2."
+  - id: "2610.01364"
+    title: "LLM-Driven Multi-Agent Control for Skill-Based Smart Manufacturing"
+    category: advisors
+  - id: "2608.24918"
+    title: "Semantic Graph Unification for Industrial Digital Threads"
+    category: digital-twin
+  - id: "2607.22563"
+    title: "Synthetic Scenario Generation for Evaluation of Industry 4.0 Agents"
+    category: benchmarks
+  - id: "2606.19704"
+    title: "Beyond Static Leaderboards: Predictive Validity for the Evaluation of LLM Agents"
+    category: benchmarks
+  - id: "2605.16265"
+    title: "AgentWall: A Runtime Safety Layer for Local AI Agents"
+    category: guardrails
+    note: "First submitted 2026-03-24, not May 2026 as v0.2 stated. No public code as of 2026-11-07."
+  - id: "2601.10440"
+    title: "AgentGuardian: Learning Access Control Policies to Govern AI Agent Behavior"
+    category: guardrails
+  - id: "2601.10156"
+    title: "ToolSafe: Enhancing Tool Invocation Safety of LLM-based agents"
+    category: guardrails
+  - id: "2507.21170"
+    title: "OneShield -- the Next Generation of LLM Guardrails"
+    category: guardrails
+  - id: "2509.11431"
+    title: "Securing AI Agents: Implementing Role-Based Access Control for Industrial Applications"
+    category: guardrails
+  - id: "2511.09122"
+    title: "Vendor-Aware Industrial Agents: RAG-Enhanced LLMs for Secure On-Premise PLC Code Generation"
+    category: plc-engineering
+  - id: "2511.05311"
+    title: "Cleaning Maintenance Logs with LLM Agents for Improved Predictive Maintenance"
+    category: predictive-maintenance
+  - id: "2610.35391"
+    title: "Autonomous Structural Discovery of Bioprocess Dynamics and Kinetics via LLM-Driven Agents"
+    category: digital-twin
+  - id: "2604.26079"
+    title: "Large Language Models as Explainable Cyberattack Detectors for Energy Industrial Control"
+    category: research-standards
+  - id: "2610.02048"
+    title: "HydroJEV: a one-second, training-free screen for cyber-attack and fault attribution in water systems"
+    category: research-standards
+  - id: "2510.11300"
+    title: "Beyond touch-based human-machine interface: Control your machines in natural language"
+    category: advisors
+  - id: "2506.03828"
+    title: "AssetOpsBench: Benchmarking AI Agents for Task Automation in Industrial Asset Operations"
+    category: benchmarks
+  - id: "2506.08119"
+    title: "SOP-Bench: Complex Industrial SOPs for Evaluating LLM Agents"
+    category: benchmarks
+  - id: "2505.03574"
+    title: "LlamaFirewall: An open source guardrail system for building secure AI agents"
+    category: guardrails
+
+# Niches with no credible entry. Re-checked 2026-11-07.
 gaps:
+  - category: guardrails
+    description: "Process-semantics-aware safety envelope: rate-of-change limits, interlock awareness, mode-dependent envelopes, cross-tag constraints. What exists governs the agent; nothing governs the physics."
+    status: open
+    note: "The only one of v0.2's protocol and guardrail gaps that has not moved. Clearest open niche in the field."
+  - category: benchmarks
+    description: "Closed-loop process control benchmark — agent as supervisor of a running dynamic process, scored on safety-envelope violations, intervention count and diagnostic quality under alarm floods."
+    status: open
+  - category: simulators
+    description: "Batch-process simulators (concrete, hydroponics, food) with fault models and realistic alarm behaviour."
+    status: open
+    note: "Re-searched across batch, fermentation, bioreactor and wastewater keywords for v0.3. Open results are student projects without fault models."
+  - category: advisors
+    description: "Open-source LLM operator advisor reference implementation."
+    status: open
+  - category: computer-vision
+    description: "Agentic (not classifier-only) VLMs for industrial CV — planning inspection routes, escalating findings, deciding what to re-inspect."
+    status: open
+    note: "Re-searched for v0.3. Vendor products exist; nothing open qualifies."
+  - category: protocol-bridges
+    description: "MCP server for OSIsoft/AVEVA PI System and for the Ignition historian specifically."
+    status: narrowed
+    note: "v0.2 said no historian MCP existed at all. chewcw/aveva-historian-mcpserver and industrial-aiops OPC UA HA have since narrowed this to PI and Ignition."
+
+# Gaps closed since v0.2, kept for the record.
+closed_gaps:
   - category: protocol-bridges
     description: "Production-quality Modbus MCP server"
+    closed_by: ["kukapay/modbus-mcp", "industrial-aiops/industrial-aiops", "IndustriAgents/IndustriConnect"]
+    note: "kukapay/modbus-mcp predated v0.2 and was simply missed."
   - category: protocol-bridges
-    description: "Historian MCP server (PI, Alpha.Historian, Aveva)"
-  - category: guardrails
-    description: "OT-aware policy layer (process-semantics aware guardrails)"
-  - category: benchmarks
-    description: "Closed-loop process control benchmark for agents"
-  - category: simulators
-    description: "Batch-process simulators (concrete, hydroponics, food)"
-  - category: advisors
-    description: "Open-source LLM operator advisor reference implementation"
+    description: "Historian MCP server"
+    closed_by: ["chewcw/aveva-historian-mcpserver", "industrial-aiops/industrial-aiops"]
   - category: predictive-maintenance
     description: "LLM-augmented predictive maintenance projects"
-  - category: computer-vision
-    description: "Agentic (not classifier-only) VLMs for industrial CV"
-  - category: digital-twin
-    description: "Reproducible digital-twin + LLM implementations"
+    closed_by: ["LGDiMaggio/predictive-maintenance-mcp"]
   - category: research-standards
     description: "Open-source ISA-18.2 alarm-management logic for agents"
+    closed_by: ["cbvance/AlarmsByTheNumbers", "industrial-aiops/industrial-aiops"]

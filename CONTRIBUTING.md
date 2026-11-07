@@ -21,7 +21,7 @@ A project is included only if it meets **all three** criteria:
 ## How to submit
 
 1. Fork this repo
-2. Add your entry to the appropriate section in **both** `README.md` and `README.ru.md`
+2. Add your entry to the appropriate section in **both** `README.md` and `README.ru.md`, and to `data.yaml`
 3. Use the entry template below
 4. Open a PR with the following in the description:
    - Which of the three criteria the project meets, with evidence
@@ -48,15 +48,25 @@ Add badges after the name where relevant:
 - **No affiliate links, no tracking parameters.**
 - **English README is primary; Russian mirror must be updated in the same PR.** If you don't speak Russian, add the entry to `README.md` only and note in the PR description that translation is needed — a maintainer will handle it.
 - **One PR per project or per category cleanup** — don't mix additions with structural changes.
+- **`data.yaml` mirrors the READMEs.** Add the project to all three in the same PR. v0.2 drifted because `data.yaml` was left behind at v0.1 while the README moved on, and the file that called itself the source of truth became the least accurate one.
+- **Never hand-edit `stars`, `pushed` or `archived`.** Those are written by `python update_stars.py` and refreshed weekly by CI. Set them to `0`/`null` in a new entry and let the script fill them in.
+- **Star counts are not a criterion.** Several of the most on-target projects in this list have zero or single-digit stars. Do not argue for inclusion on popularity, and do not argue for exclusion on obscurity.
 
-## What we especially want in v0.1
+## What we especially want in v0.3
 
-Priority contributions:
+Five niches are marked 🚧 because they are genuinely empty, re-checked on 2026-11-07. One credible entry in any of them is worth more than ten additions elsewhere:
 
-1. **Filling 🚧 categories** — the empty categories are marked because the corresponding niche is genuinely underserved. Even one credible entry per gap is high-value.
-2. **Chinese-ecosystem coverage** 🇨🇳 — the Chinese industrial agent space is active (Huawei's industrial AI stack, Alibaba Cloud IoT + LLM, various OPC UA MCP experiments) and severely underrepresented in English-language lists.
-3. **Corrections** — if a project I listed as "no policy layer" actually has one, or a category I marked as empty has a real project, file an issue or PR.
-4. **Removing hype** — if you find a project that shouldn't be here by the curation stance, PR the deletion with justification.
+1. **Process-semantics-aware safety envelope** — a guardrail that understands rate-of-change limits, interlocks, mode-dependent envelopes and cross-tag constraints. Everything that exists governs the *agent*; nothing governs the *physics*. This is the clearest open niche in the field.
+2. **Closed-loop process control benchmark** — an agent supervising a running dynamic process, scored on safety-envelope violations, intervention count and diagnostic quality under alarm floods.
+3. **Batch-process simulators** (concrete, hydroponics, food) with fault models and realistic alarm behaviour. Closing this unlocks #2.
+4. **Open-source LLM operator advisor** — no open reference implementation exists.
+5. **Agentic industrial computer vision** — where the VLM plans inspection routes and escalates findings, not a classifier behind an API.
+
+Also wanted:
+
+6. **Corrections.** v0.3 exists because v0.2 contained wrong star counts, a stale repository path, an archived project listed as live, a misdated preprint, and four "nothing exists here" claims that were already false. If something here is wrong, say so — that is the most valuable contribution to this list.
+7. **Non-English ecosystems.** The 🇨🇳 Chinese section was added in v0.3 and is still thin. Japanese, Korean and German industrial projects are entirely absent.
+8. **Removing hype** — if a project doesn't meet the curation stance, PR the deletion with justification.
 
 ## What we don't want
 
@@ -67,4 +77,4 @@ Priority contributions:
 
 ## Questions
 
-Open an issue with the `question` label. Substantive category or scope questions are welcome — this list is v0.1 and the shape of it will evolve.
+Open an issue with the `question` label. Substantive category or scope questions are welcome — this list is v0.3 and the shape of it will evolve.

@@ -1,0 +1,4 @@
+# Keep text files LF in the repository so CI shell steps are not fed CR characters.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
