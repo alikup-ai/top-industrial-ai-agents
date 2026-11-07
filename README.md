@@ -18,7 +18,7 @@ This list tries to answer a narrower question: **which agentic-AI projects survi
 
 **Curation stance:** "Top" in the name means opinionated. Projects included must (a) be reproducible or verifiably deployed, (b) address an industrial concern explicitly, (c) have public documentation. Marketing pages without code, demos, or peer-reviewed papers are rejected. A closed-source project may be listed if it has documented industrial deployments — it will be marked 🔒. Star counts are a weak signal in this niche and are **not** a criterion: several of the most on-target projects here have single-digit stars.
 
-**Status:** v0.3 — **all entries, links, star counts, licenses and arXiv IDs re-verified 2026-11-07.** Four categories that v0.2 declared empty have since been filled; see [What changed in v0.3](#what-changed-in-v03). Remaining genuinely-empty niches are marked 🚧.
+**Status:** v0.3.1 — **all entries, links, star counts, licenses and arXiv IDs re-verified 2026-11-07.** Four categories that v0.2 declared empty have since been filled; see [What changed in v0.3](#what-changed-in-v03). Remaining genuinely-empty niches are marked 🚧.
 
 [kurilyak]: https://github.com/slavakurilyak/awesome-ai-agents
 
@@ -39,6 +39,7 @@ This list tries to answer a narrower question: **which agentic-AI projects survi
 - [📚 Research & Standards](#-research--standards) — key papers, standards, consortium reports
 - [🧰 Adjacent Tools Worth Knowing](#-adjacent-tools-worth-knowing) — general-purpose but genuinely useful in OT context
 - [🇨🇳 Chinese Ecosystem](#-chinese-ecosystem) — projects published primarily in Chinese
+- [What changed in v0.3.1](#what-changed-in-v031)
 - [What changed in v0.3](#what-changed-in-v03)
 
 Legend: ⭐ stars · 🔒 closed-source · 🚧 category open for contributions · 📦 archived/unmaintained · 🇷🇺 Russian-speaking ecosystem · 🇨🇳 Chinese ecosystem
@@ -160,8 +161,27 @@ Production-oriented security toolkit for LLM interactions. **The repository was 
 - **[ToolSafe](https://arxiv.org/abs/2601.10156)** — pre-execution safety detection at the tool-call step.
 - **[OneShield](https://arxiv.org/abs/2507.21170)** — "next-generation LLM guardrails" from IBM.
 
-### 🚧 Process-semantics-aware safety envelope — still missing
-The gap, restated more precisely than in v0.2 now that bridge-level and call-level governance exist: **nothing open understands the process.** A write of 40 °C to `TIC-101` can be inside the absolute range, inside the operator's allowlist, within budget, fully audited and still dangerous — because the current value is 22 °C, the ramp violates a thermal-shock limit, and an interlock three tags away is bypassed. What exists today governs *the agent* (profiles, risk tiers, audit, undo). What is still missing governs *the physics*: rate-of-change limits, interlock awareness, mode-dependent envelopes, and cross-tag constraints expressed once and enforced for every agent. **Still the clearest open niche in industrial agentic AI, and now the only one of v0.2's five protocol/guardrail gaps that has not moved.**
+### [alikup-ai/otgate](https://github.com/alikup-ai/otgate) — the only open process-aware policy layer ⭐0
+> **Disclosure: this is the maintainer's own project.** It is listed because v0.3 of this list declared its niche empty, which was wrong. Weigh the verdict below accordingly, and PR a deletion if you think it does not meet the curation stance.
+
+An authorization gateway that sits between an agent and an OPC UA server, and is itself an MCP server: the agent connects to it as if it were an ordinary OPC UA MCP, and every call is intercepted. Policy is per tag, deny-by-default, and expressed in process terms — `value_range`, `max_rate` over `rate_interval`, `interlocks` that read live guard tags, `cumulative_range` over a window so a forbidden move cannot be sliced into legal steps, and `max_calls` against call storms. Writes can require **human approval on a physically separate authenticated channel**, so the agent cannot even see the `approve` tool; approval re-checks policy against current process state before executing, because an interlock may have tripped while the request waited. Shadow mode executes nothing and records what the agent *would* have done. Unverifiable safety conditions **fail closed**. Apache-2.0, Python, 142 tests including an integration suite against a live `opc.tcp://` server.
+
+**Verdict:** this is the category the gap below describes, and the only open implementation of it — but judge it as alpha. Zero stars, no forks, no field deployment, one author. It went unmaintained from July to November 2026, during which a major `mcp` release broke its install outright; that, and two baseline defects in its own core checks (rate and drift were measured against the gateway's own memory rather than the live process, so a 144-unit jump passed a 5-per-60s policy), were fixed in November. The honest reading: the *design* is the right shape for OT and nothing else open has it; the *implementation* has had one careful pass and no adversarial contact with a real plant. Its [threat model](https://github.com/alikup-ai/otgate/blob/main/docs/threat-model.md) is explicit about what it does not cover.
+
+### 🚧 Process-semantics-aware safety envelope — one alpha implementation, problem not solved
+**Corrected in v0.3.1.** v0.3 said "nothing open understands the process". That was wrong — `otgate` above does, and it existed when v0.3 was written. The gap is narrower than stated, and still real.
+
+The problem itself is unchanged. A write of 40 °C to `TIC-101` can be inside the absolute range, inside the operator's allowlist, within budget, fully audited and still dangerous — because the current value is 22 °C, the ramp violates a thermal-shock limit, and an interlock three tags away is bypassed. Everything else in this section governs *the agent* (profiles, risk tiers, audit, undo); governing *the physics* takes a different kind of policy.
+
+What is genuinely still missing:
+
+- **Field validation.** One alpha project with zero stars and no deployment is not a solved category. Until an envelope like this has been run against a real plant by someone other than its author, the category is unproven rather than filled.
+- **Cross-tag constraints.** Envelopes and budgets are per tag everywhere, `otgate` included. An agent that spreads its effect across several tags, each inside its own allowance, is detected by nothing open.
+- **Mode-dependent envelopes.** Safe limits differ between startup, steady state, shutdown and maintenance. No open project expresses "this range applies only in these process modes".
+- **Trend awareness.** A tag's live value tells you *where* the process is, not *how* it got there. Nothing open consults the historian trend before judging a write.
+- **A vendor-neutral way to express any of it.** Text guardrails have Colang, OPA and Cedar. Process envelopes have one project's YAML dialect. ISA-88 modes and ISA-18.2 alarm states are the obvious vocabularies, and nobody has mapped them onto agent policy.
+
+**Still the clearest open niche in industrial agentic AI** — not because it is empty, but because what exists is a single unproven implementation and four of the five hard parts are untouched.
 
 ---
 
@@ -348,6 +368,12 @@ General-purpose but genuinely useful when building industrial agent systems:
 
 ---
 
+## What changed in v0.3.1
+
+A correction, not a sweep. v0.3 declared the process-semantics safety-envelope niche empty. It was not: [`alikup-ai/otgate`](https://github.com/alikup-ai/otgate) implements exactly that category and had existed since July 2026. It is now listed under Guardrails with a disclosure that it is this list's maintainer's own project, and the gap is rewritten to say what is actually still missing — field validation, cross-tag constraints, mode-dependent envelopes, trend awareness, and a vendor-neutral vocabulary — instead of claiming nothing exists.
+
+The lesson is the one this list keeps relearning. A "nothing exists here" claim is the most perishable thing in a curated list and the hardest to notice going stale, because nobody opens a PR to tell you a gap has stopped being a gap.
+
 ## What changed in v0.3
 
 Re-verified every entry on **2026-11-07** against the GitHub and arXiv APIs. v0.2 was published 2026-07-22 and not updated since.
@@ -375,7 +401,7 @@ Re-verified every entry on **2026-11-07** against the GitHub and arXiv APIs. v0.
 - Weekly automated metric refresh via GitHub Actions, so this list cannot silently rot again.
 
 **Gaps that did not move, and are the real open niches:**
-1. **Process-semantics-aware safety envelope** — governing the physics, not the agent.
+1. **Process-semantics-aware safety envelope** — governing the physics, not the agent. *(Corrected in v0.3.1: one alpha implementation exists, `otgate`. Field validation, cross-tag constraints, mode-dependent envelopes, trend awareness and a vendor-neutral policy vocabulary are all still missing.)*
 2. **Closed-loop process control benchmark.**
 3. **Batch-process simulators** with fault and alarm behaviour.
 4. **Open-source LLM operator advisor.**
