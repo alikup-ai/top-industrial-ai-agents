@@ -8,7 +8,7 @@
 
 version: 0.3.1
 last_updated: 2026-11-07
-last_verified: 2026-11-07
+last_verified: 2026-11-09
 
 categories:
   - id: protocol-bridges
@@ -88,7 +88,7 @@ projects:
     open_source: true
     license: MIT
     stars: 31
-    pushed: 2026-11-05
+    pushed: 2026-11-09
     archived: false
     tags: [opc-ua, mcp, python, nodejs, read-only-default, recommended]
     summary_en: "Python and Node OPC UA MCP behind one tool contract. PyPI + npm, CI, .mcpb bundle, bundled plant simulator. Read-only by default; writes need a control profile, an authenticated server, allowlisted targets and are audited."
@@ -134,7 +134,7 @@ projects:
     open_source: true
     license: AGPL-3.0
     stars: 19
-    pushed: 2026-11-06
+    pushed: 2026-11-09
     archived: false
     tags: [opc-ua, mcp, i3x, rest]
     verdict_en: "Turns any OPC UA server into an i3X-compliant REST and MCP API. From a known OPC UA community contributor."
@@ -145,7 +145,7 @@ projects:
     open_source: true
     license: Apache-2.0
     stars: 2
-    pushed: 2026-10-23
+    pushed: 2026-11-08
     archived: false
     tags: [opc-ua, mcp, information-modeling]
     verdict_en: "From the node-opcua project itself. Addresses address-space modeling and companion-spec discovery, not data access."
@@ -254,7 +254,7 @@ projects:
     open_source: true
     license: null
     stars: 27
-    pushed: 2026-10-01
+    pushed: 2026-11-09
     archived: false
     vendor: Siemens
     tags: [opc-ua, mqtt, mcp, vendor, wincc-oa, scada]
@@ -333,7 +333,7 @@ projects:
     open_source: true
     license: MIT
     stars: 10
-    pushed: 2026-11-04
+    pushed: 2026-11-09
     archived: false
     also_in: [guardrails, predictive-maintenance, research-standards]
     tags: [multi-protocol, opc-ua, modbus, s7, ethernet-ip, bacnet, sparkplug, secs-gem, governance, isa-18.2, read-first]
@@ -346,7 +346,7 @@ projects:
     open_source: true
     license: MIT
     stars: 2
-    pushed: 2026-10-18
+    pushed: 2026-11-09
     archived: false
     tags: [iec-104, dnp3, iec-61850, substation, read-only]
     verdict_en: "Energy edition of the above: substation telecontrol protocols, read-only."
@@ -378,8 +378,8 @@ projects:
     url: "https://github.com/Arienax/gxworks-agent"
     open_source: true
     license: Apache-2.0
-    stars: 24
-    pushed: 2026-11-06
+    stars: 26
+    pushed: 2026-11-08
     archived: false
     also_in: [chinese-ecosystem]
     tags: [mitsubishi, gx-works, plc-programming, mcp]
@@ -414,7 +414,7 @@ projects:
     url: "https://github.com/meta-llama/PurpleLlama"
     open_source: true
     license: null
-    stars: 4467
+    stars: 4470
     pushed: 2026-10-30
     archived: false
     paper: "2505.03574"
@@ -426,7 +426,7 @@ projects:
     url: "https://github.com/NVIDIA-NeMo/Guardrails"
     open_source: true
     license: null
-    stars: 7446
+    stars: 7458
     pushed: 2026-11-07
     archived: false
     tags: [guardrails, general-purpose, colang]
@@ -438,7 +438,7 @@ projects:
     open_source: true
     license: Apache-2.0
     stars: 0
-    pushed: 2026-11-07
+    pushed: 2026-11-08
     archived: false
     maintainer_own_project: true
     tags: [opc-ua, mcp, process-semantics, interlocks, rate-limit, human-approval, fail-closed, owasp-asi02]
@@ -451,7 +451,7 @@ projects:
     open_source: true
     license: Apache-2.0
     stars: 15
-    pushed: 2026-11-07
+    pushed: 2026-11-09
     archived: false
     tags: [runtime-governance, mcp, robotics]
     verdict_en: "Runtime security and governance for agents, MCP tools and robots. Adjacent rather than industrial, but framed as runtime governance rather than text filtering."
@@ -461,7 +461,7 @@ projects:
     url: "https://github.com/protectai/llm-guard"
     open_source: true
     license: MIT
-    stars: 3219
+    stars: 3218
     pushed: 2026-07-08
     archived: true
     tags: [guardrails, general-purpose, archived]
@@ -473,8 +473,8 @@ projects:
     url: "https://github.com/IBM/AssetOpsBench"
     open_source: true
     license: null
-    stars: 2411
-    pushed: 2026-11-05
+    stars: 2415
+    pushed: 2026-11-09
     archived: false
     paper: "2506.03828"
     also_in: [predictive-maintenance]
@@ -610,8 +610,8 @@ projects:
     url: "https://github.com/LGDiMaggio/predictive-maintenance-mcp"
     open_source: true
     license: MIT
-    stars: 109
-    pushed: 2026-11-07
+    stars: 112
+    pushed: 2026-11-09
     archived: false
     doi: "10.5281/zenodo.17611542"
     tags: [predictive-maintenance, vibration, condition-monitoring, iso-20816, mcp, recommended]
@@ -660,8 +660,8 @@ projects:
     url: "https://github.com/stanfordnlp/dspy"
     open_source: true
     license: MIT
-    stars: 38964
-    pushed: 2026-11-06
+    stars: 38984
+    pushed: 2026-11-09
     archived: false
     tags: [prompt-optimization]
     verdict_en: "Compilable-prompt framework. Relevant for evals-heavy industrial workflows. v0.2 said '~35k stars'."
@@ -671,8 +671,8 @@ projects:
     url: "https://github.com/topoteretes/cognee"
     open_source: true
     license: Apache-2.0
-    stars: 33121
-    pushed: 2026-11-07
+    stars: 33180
+    pushed: 2026-11-09
     archived: false
     tags: [knowledge-graph]
     verdict_en: "Knowledge-graph layer. Useful for grounding agents in regulations, SOPs and P&IDs."
@@ -682,8 +682,8 @@ projects:
     url: "https://github.com/e2b-dev/E2B"
     open_source: true
     license: Apache-2.0
-    stars: 14758
-    pushed: 2026-11-06
+    stars: 14782
+    pushed: 2026-11-09
     archived: false
     tags: [sandbox]
     verdict_en: "Sandboxed code execution. Conceptually related to shadow-mode for OT agents."
@@ -693,7 +693,7 @@ projects:
     url: "https://github.com/AgentOps-AI/agentops"
     open_source: true
     license: MIT
-    stars: 5948
+    stars: 5949
     pushed: 2026-06-25
     archived: false
     tags: [observability, evals]
@@ -704,7 +704,7 @@ projects:
     url: "https://github.com/pnoker/iot-dc3"
     open_source: true
     license: null
-    stars: 1266
+    stars: 1268
     pushed: 2026-11-01
     archived: false
     tags: [iiot-platform, java]
