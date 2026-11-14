@@ -456,6 +456,18 @@ projects:
     tags: [runtime-governance, mcp, robotics]
     verdict_en: "Runtime security and governance for agents, MCP tools and robots. Adjacent rather than industrial, but framed as runtime governance rather than text filtering."
 
+  - name: "shadowhunter-92/wafertrust — WaferTrust"
+    category: guardrails
+    url: "https://github.com/shadowhunter-92/wafertrust"
+    open_source: true
+    license: Apache-2.0
+    stars: 0
+    pushed: null
+    archived: null
+    tags: [secs-gem, mcp, governance, wafer-dollar-budget, human-approval, hash-chained-audit, fab, simulator]
+    summary_en: "Python MCP-wire gateway demo for simulated semiconductor equipment and maintenance workflows. AgentBridge kernel in fail-closed production mode authenticates every call with a request-bound Ed25519 proof, logs reads, and gates sensitive writes on one-shot human approval and sufficient budget. Fixed illustrative wafer-dollar tool costs, cumulative budget, per-call cap, durable hash-chained SQLite audit with a signed checkpoint and full-field export."
+    verdict_en: "DISCLOSURE: submitter's own project. Simulator-based alpha, no field deployment or live SECS/GEM connection. Tool-access governance, not a process-physics envelope. Every call requires a request-bound Ed25519 proof; unsigned, forged, or tampered calls are denied fail-closed and the denial is audited. Approvals are one-shot and bound to the exact request; a succeeded operation cannot be replayed. The durable hash-chained SQLite audit exports every field, with an operator-key signed checkpoint and a call journal (arguments + outcomes); verify_export.py re-verifies the export standalone (14 hardening tests). Entries are hash-chained, not individually signed; the checkpoint authenticates its signer, not independent custody. The agentAudit extension is simulated, not native E191. Overlaps industrial-aiops' SECS/GEM governance; useful for evaluating fab-first audit/approval workflows and illustrative wafer-dollar accounting, not production safety or SEMI compliance."
+
   - name: "protectai/llm-guard"
     category: guardrails
     url: "https://github.com/protectai/llm-guard"
