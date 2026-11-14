@@ -147,6 +147,22 @@ Runtime security and governance for AI agents, MCP tools and robots. TypeScript,
 
 **Verdict:** adjacent rather than industrial — robots and MCP tools generally, not process semantics — but the only other open project framing itself as runtime governance rather than text filtering. Worth tracking.
 
+### [shadowhunter-92/wafertrust — WaferTrust](https://github.com/shadowhunter-92/wafertrust) — fab-first agent-governance prototype
+Python gateway demo at the MCP tool-call boundary for simulated semiconductor equipment and
+maintenance workflows. Uses AgentBridge's governance kernel: reads are logged; sensitive writes
+require human approval and sufficient budget. Fixed per-tool costs express illustrative
+wafer-dollar exposure, with a cumulative budget and per-call cap. The full in-process audit
+is hash-chained. Apache-2.0.
+
+**Verdict:** runnable simulator-based alpha, with no field deployment or live SECS/GEM connection.
+Governs tool access, not process physics: no live interlocks, rate-of-change, cross-tag, or
+mode-dependent envelope. Audit entries are unsigned; registered Ed25519 identities do not
+provide caller-signature verification in this demo. Committed JSONL files are partial summaries,
+not self-contained independently verifiable logs. Useful for evaluating a fab-first audit/approval
+workflow and illustrative wafer-dollar accounting, not production safety or SEMI compliance.
+The agentAudit extension is simulated, not a native E191 field. Overlaps industrial-aiops'
+SECS/GEM governance; does not claim to replace it or fill the process-semantics gap.
+
 ### 📦 [protectai/llm-guard](https://github.com/protectai/llm-guard) — archived ⭐3219
 Production-oriented security toolkit for LLM interactions. **The repository was archived (read-only) and receives no further development.** Listed in v0.2 without that caveat.
 
