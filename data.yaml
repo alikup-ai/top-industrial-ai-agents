@@ -8,7 +8,7 @@
 
 version: 0.3.1
 last_updated: 2026-11-07
-last_verified: 2026-11-16
+last_verified: 2026-11-23
 
 categories:
   - id: protocol-bridges
@@ -87,8 +87,8 @@ projects:
     url: "https://github.com/IndustriAgents/OPCUA-MCP"
     open_source: true
     license: MIT
-    stars: 33
-    pushed: 2026-11-15
+    stars: 36
+    pushed: 2026-11-20
     archived: false
     tags: [opc-ua, mcp, python, nodejs, read-only-default, recommended]
     summary_en: "Python and Node OPC UA MCP behind one tool contract. PyPI + npm, CI, .mcpb bundle, bundled plant simulator. Read-only by default; writes need a control profile, an authenticated server, allowlisted targets and are audited."
@@ -99,7 +99,7 @@ projects:
     url: "https://github.com/kukapay/opcua-mcp"
     open_source: true
     license: MIT
-    stars: 31
+    stars: 32
     pushed: 2025-10-29
     archived: false
     tags: [opc-ua, mcp, educational]
@@ -122,7 +122,7 @@ projects:
     url: "https://github.com/mwieczorkiewicz/opcua-mcp"
     open_source: true
     license: MIT
-    stars: 5
+    stars: 7
     pushed: 2026-10-28
     archived: false
     tags: [opc-ua, mcp, go, robotics]
@@ -134,7 +134,7 @@ projects:
     open_source: true
     license: AGPL-3.0
     stars: 19
-    pushed: 2026-11-16
+    pushed: 2026-11-23
     archived: false
     tags: [opc-ua, mcp, i3x, rest]
     verdict_en: "Turns any OPC UA server into an i3X-compliant REST and MCP API. From a known OPC UA community contributor."
@@ -145,7 +145,7 @@ projects:
     open_source: true
     license: Apache-2.0
     stars: 2
-    pushed: 2026-11-08
+    pushed: 2026-11-21
     archived: false
     tags: [opc-ua, mcp, information-modeling]
     verdict_en: "From the node-opcua project itself. Addresses address-space modeling and companion-spec discovery, not data access."
@@ -187,8 +187,8 @@ projects:
     url: "https://github.com/IndustriAgents/IndustriConnect"
     open_source: true
     license: MIT
-    stars: 10
-    pushed: 2026-11-09
+    stars: 13
+    pushed: 2026-11-20
     archived: false
     tags: [modbus, multi-protocol, mcp, typescript]
     verdict_en: "Multi-protocol device-to-agent connector."
@@ -254,7 +254,7 @@ projects:
     open_source: true
     license: null
     stars: 28
-    pushed: 2026-11-09
+    pushed: 2026-11-23
     archived: false
     vendor: Siemens
     tags: [opc-ua, mqtt, mcp, vendor, wincc-oa, scada]
@@ -277,7 +277,7 @@ projects:
     url: "https://github.com/vogler75/winccv8-mcp-server"
     open_source: true
     license: GPL-3.0
-    stars: 13
+    stars: 14
     pushed: 2025-10-15
     archived: false
     tags: [wincc-v8, mcp, scada]
@@ -332,8 +332,8 @@ projects:
     url: "https://github.com/industrial-aiops/industrial-aiops"
     open_source: true
     license: MIT
-    stars: 12
-    pushed: 2026-11-16
+    stars: 14
+    pushed: 2026-11-22
     archived: false
     also_in: [guardrails, predictive-maintenance, research-standards]
     tags: [multi-protocol, opc-ua, modbus, s7, ethernet-ip, bacnet, sparkplug, secs-gem, governance, isa-18.2, read-first]
@@ -378,8 +378,8 @@ projects:
     url: "https://github.com/Arienax/gxworks-agent"
     open_source: true
     license: Apache-2.0
-    stars: 33
-    pushed: 2026-11-14
+    stars: 39
+    pushed: 2026-11-17
     archived: false
     also_in: [chinese-ecosystem]
     tags: [mitsubishi, gx-works, plc-programming, mcp]
@@ -390,7 +390,7 @@ projects:
     url: "https://github.com/agimx-ai/seedagent-tia-programming"
     open_source: true
     license: null
-    stars: 14
+    stars: 17
     pushed: 2026-10-12
     archived: false
     also_in: [chinese-ecosystem]
@@ -402,7 +402,7 @@ projects:
     url: "https://github.com/gangsterke/Tia-Portal-MCP-server"
     open_source: true
     license: null
-    stars: 10
+    stars: 11
     pushed: 2025-10-12
     archived: false
     tags: [siemens, tia-portal, nodeset, mcp, csharp]
@@ -414,8 +414,8 @@ projects:
     url: "https://github.com/meta-llama/PurpleLlama"
     open_source: true
     license: null
-    stars: 4483
-    pushed: 2026-11-13
+    stars: 4492
+    pushed: 2026-11-20
     archived: false
     paper: "2505.03574"
     tags: [guardrails, general-purpose]
@@ -426,8 +426,8 @@ projects:
     url: "https://github.com/NVIDIA-NeMo/Guardrails"
     open_source: true
     license: null
-    stars: 7509
-    pushed: 2026-11-16
+    stars: 7558
+    pushed: 2026-11-19
     archived: false
     tags: [guardrails, general-purpose, colang]
     verdict_en: "Five rail types, Colang policy language, plausibly extensible to industrial rules. Moved from NVIDIA/NeMo-Guardrails — v0.1 of this file had the stale path."
@@ -461,7 +461,7 @@ projects:
     url: "https://github.com/protectai/llm-guard"
     open_source: true
     license: MIT
-    stars: 3216
+    stars: 3223
     pushed: 2026-07-08
     archived: true
     tags: [guardrails, general-purpose, archived]
@@ -473,8 +473,8 @@ projects:
     url: "https://github.com/IBM/AssetOpsBench"
     open_source: true
     license: null
-    stars: 2426
-    pushed: 2026-11-16
+    stars: 2483
+    pushed: 2026-11-21
     archived: false
     paper: "2506.03828"
     also_in: [predictive-maintenance]
@@ -486,7 +486,7 @@ projects:
     url: "https://github.com/amazon-science/SOP-Bench"
     open_source: true
     license: null
-    stars: 46
+    stars: 48
     pushed: 2026-08-27
     archived: false
     paper: "2506.08119"
@@ -610,8 +610,8 @@ projects:
     url: "https://github.com/LGDiMaggio/predictive-maintenance-mcp"
     open_source: true
     license: MIT
-    stars: 114
-    pushed: 2026-11-16
+    stars: 118
+    pushed: 2026-11-23
     archived: false
     doi: "10.5281/zenodo.17611542"
     tags: [predictive-maintenance, vibration, condition-monitoring, iso-20816, mcp, recommended]
@@ -660,8 +660,8 @@ projects:
     url: "https://github.com/stanfordnlp/dspy"
     open_source: true
     license: MIT
-    stars: 39092
-    pushed: 2026-11-13
+    stars: 39196
+    pushed: 2026-11-21
     archived: false
     tags: [prompt-optimization]
     verdict_en: "Compilable-prompt framework. Relevant for evals-heavy industrial workflows. v0.2 said '~35k stars'."
@@ -671,8 +671,8 @@ projects:
     url: "https://github.com/topoteretes/cognee"
     open_source: true
     license: Apache-2.0
-    stars: 33347
-    pushed: 2026-11-16
+    stars: 33511
+    pushed: 2026-11-23
     archived: false
     tags: [knowledge-graph]
     verdict_en: "Knowledge-graph layer. Useful for grounding agents in regulations, SOPs and P&IDs."
@@ -682,8 +682,8 @@ projects:
     url: "https://github.com/e2b-dev/E2B"
     open_source: true
     license: Apache-2.0
-    stars: 14891
-    pushed: 2026-11-16
+    stars: 14982
+    pushed: 2026-11-23
     archived: false
     tags: [sandbox]
     verdict_en: "Sandboxed code execution. Conceptually related to shadow-mode for OT agents."
@@ -693,7 +693,7 @@ projects:
     url: "https://github.com/AgentOps-AI/agentops"
     open_source: true
     license: MIT
-    stars: 5963
+    stars: 5972
     pushed: 2026-06-25
     archived: false
     tags: [observability, evals]
@@ -704,7 +704,7 @@ projects:
     url: "https://github.com/pnoker/iot-dc3"
     open_source: true
     license: null
-    stars: 1273
+    stars: 1276
     pushed: 2026-11-11
     archived: false
     tags: [iiot-platform, java]
@@ -715,8 +715,8 @@ projects:
     url: "https://github.com/anviod/edgeCore"
     open_source: true
     license: null
-    stars: 136
-    pushed: 2026-11-09
+    stars: 138
+    pushed: 2026-11-16
     archived: false
     tags: [industrial-edge, go]
 
@@ -736,7 +736,7 @@ projects:
     url: "https://github.com/TobiasLante/node-red-contrib-mcp"
     open_source: true
     license: Apache-2.0
-    stars: 15
+    stars: 16
     pushed: 2026-02-23
     archived: false
     tags: [node-red, mcp]
@@ -747,8 +747,8 @@ projects:
     url: "https://github.com/akya-dev/AyMON"
     open_source: true
     license: null
-    stars: 13
-    pushed: 2026-11-16
+    stars: 14
+    pushed: 2026-11-22
     archived: false
     tags: [scada, iiot, monitoring]
 
@@ -758,7 +758,7 @@ projects:
     url: "https://github.com/iduyuhe/zhiyan-evolviq"
     open_source: true
     license: Apache-2.0
-    stars: 14
+    stars: 15
     pushed: 2026-10-17
     archived: false
     tags: [industrial-agent-platform, china]
