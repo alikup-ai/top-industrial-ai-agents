@@ -147,6 +147,27 @@ Runtime security and governance for AI agents, MCP tools and robots. TypeScript,
 
 **Verdict:** adjacent rather than industrial — robots and MCP tools generally, not process semantics — but the only other open project framing itself as runtime governance rather than text filtering. Worth tracking.
 
+### [shadowhunter-92/wafertrust — WaferTrust](https://github.com/shadowhunter-92/wafertrust) — fab-first agent-governance prototype
+Python gateway demo at the MCP tool-call boundary for simulated semiconductor equipment and
+maintenance workflows. Uses AgentBridge's governance kernel in fail-closed production mode: every
+call carries a request-bound Ed25519 proof; reads are logged; sensitive writes require one-shot
+human approval and sufficient budget. Fixed per-tool costs express illustrative wafer-dollar
+exposure, with a cumulative budget and per-call cap. The durable SQLite audit is hash-chained and
+exported with every field, an operator-key signed checkpoint, and a call journal. Apache-2.0.
+
+**Verdict:** runnable simulator-based alpha, with no field deployment or live SECS/GEM connection.
+Governs tool access, not process physics: no live interlocks, rate-of-change, cross-tag, or
+mode-dependent envelope. Every call requires a request-bound Ed25519 proof; unsigned, forged, or
+tampered calls are denied fail-closed and the denial is audited. Approvals are one-shot and bound
+to the exact request; a succeeded operation cannot be replayed. The durable hash-chained SQLite
+audit exports every field, with an operator-key signed checkpoint and a call journal (arguments +
+outcomes); verify_export.py re-verifies the export standalone (14 hardening tests). Entries are
+hash-chained, not individually signed; the checkpoint authenticates its signer, not independent
+custody. Useful for evaluating a fab-first audit/approval workflow and illustrative wafer-dollar
+accounting, not production safety or SEMI compliance. The agentAudit extension is simulated, not a
+native E191 field. Overlaps industrial-aiops' SECS/GEM governance; does not claim to replace it or
+fill the process-semantics gap.
+
 ### 📦 [protectai/llm-guard](https://github.com/protectai/llm-guard) — archived ⭐3219
 Production-oriented security toolkit for LLM interactions. **The repository was archived (read-only) and receives no further development.** Listed in v0.2 without that caveat.
 
